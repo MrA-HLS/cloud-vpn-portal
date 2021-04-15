@@ -1,0 +1,21 @@
+version: '3.6'
+services:
+  user-portal:
+    image: h44z/wg-portal:1.06
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    network_mode: "host"
+    volumes:
+      - /etc/wireguard:/etc/wireguard
+      - ./data:/app/data
+    ports:
+      - '80:80'
+    environment:
+      - LISTENING_ADDRESS=:80
+      - EXTERNAL_URL=http://vpn.hls.org:80
+      - WEBSITE_TITLE="HLSMP VPN"
+      - COMPANY_NAME="HLS"
+      - MAIL_FROM=vpn_portal@hls.org
+      - ADMIN_USER=hls-admin@hls.org
+      - ADMIN_PASS=DZr9^BX4l332bRu
